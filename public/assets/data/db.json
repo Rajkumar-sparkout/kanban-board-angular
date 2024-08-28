@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": "53f4",
+      "name": "Raj",
+      "email": "raj@gmail.com",
+      "password": "Raj@1234"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "8c72",
+      "title": "Test1",
+      "description": "Description1",
+      "dueDate": "2024-08-06T18:30:00.000Z",
+      "priority": "Urgent",
+      "status": "Todo"
+    },
+    {
+      "id": "1854",
+      "title": "Test2",
+      "description": "Description2",
+      "dueDate": "2024-08-07T18:30:00.000Z",
+      "priority": "Medium",
+      "status": "Todo"
+    },
+    {
+      "id": "75c8",
+      "title": "Test3",
+      "description": "Description3",
+      "dueDate": "2024-08-29T18:30:00.000Z",
+      "priority": "Low",
+      "status": "Todo"
+    }
+  ]
+}

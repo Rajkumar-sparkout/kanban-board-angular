@@ -1,0 +1,24 @@
+<mat-toolbar class="navbar stickyTop" color="primary">
+    <div class="space-between">
+        <div class="nav-title">Sparkout</div>
+        <div class="menus">
+            <span class="menu">Home</span>
+            <span class="menu">About</span>
+            <span class="menu">Service</span>
+            <span class="menu">Contact</span>
+            <span class="menu" *ngIf="loginTab">Login</span>
+            <span class="menu" *ngIf="!loginTab" (click)="logout()">Logout</span>
+        </div>
+    </div>
+    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button> -->
+    <!-- <span>My App</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button> -->
+</mat-toolbar>

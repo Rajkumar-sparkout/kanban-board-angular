@@ -1,0 +1,30 @@
+<app-popup [message]="message" [type]="messageType"></app-popup>
+
+<div class="container">
+    <mat-card class="example-card" appearance="outlined">
+        <form class="formTag" [formGroup]="loginForm">
+            <div><h6>Login Here</h6></div>
+            <div class="form">
+                <mat-form-field>
+                    <mat-label>Username</mat-label>
+                    <input matInput type="email" formControlName="email" placeholder="UserName">
+                    @if (loginFormControl.email.invalid && loginFormControl.email.touched) {
+                        <mat-error>Username is required</mat-error>
+                      }                  
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="Password">
+                    @if (loginFormControl.password.invalid && loginFormControl.password.touched) {
+                        <mat-error>password is required</mat-error>
+                      }  
+                </mat-form-field>
+                <button mat-flat-button (click)="login()">Sign in</button>
+                <hr>
+                <p class="text-sm font-light mt-2 text-gray-500 dark:text-gray-400">
+                    Don't have an account yet? <a (click)="gotoRegister()" class="primary" color="primary">Sign up</a>
+                </p>
+            </div>
+        </form>
+      </mat-card>
+</div>

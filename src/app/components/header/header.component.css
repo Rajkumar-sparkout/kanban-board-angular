@@ -1,0 +1,29 @@
+.navbar{
+    background-color: #2c4c66;
+    position: sticky;
+}
+
+.nav-title{
+    color: white;
+    font-size: 20px;
+    margin: 0% 10%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.menu{
+    color: white;
+    font-size: 14px;
+    margin: 0% 5%;
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.space-between{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+}
+
+.menus{
+    margin-left: 280%;
+}

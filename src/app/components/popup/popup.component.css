@@ -1,0 +1,22 @@
+.fixed{
+    margin-top: 20px;
+    padding: 4px;
+}
+
+.bg-green-500{
+    background-color: green;
+    color: white;
+    padding: 1.5%;
+    position: absolute;
+    right: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+}
+
+.bg-red-500{
+    background-color: red;
+    color: white;
+    padding: 1.5%;
+    position: absolute;
+    right: 0; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+}

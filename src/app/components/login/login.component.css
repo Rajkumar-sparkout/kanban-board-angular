@@ -1,0 +1,42 @@
+
+.example-card {
+    width: 450px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  mat-form-field{
+    margin-top: 7px;
+  }
+
+  .form{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formTag{
+    padding: 30px;
+  }
+
+  .primary{
+    color: blue;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  mat-error{
+    font-size: 14px;
+    margin-bottom: 7px;
+  }

@@ -1,0 +1,67 @@
+<app-popup [message]="message" [type]="messageType"></app-popup>
+<div class="container">
+    <mat-card class="example-card" appearance="outlined">
+        <form class="formTag" [formGroup]="register">
+            <div><h6>Signup</h6></div>
+            <div class="form">
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput type="name" formControlName="name" placeholder="UserName">
+                    @if (registerFormControl.name.invalid && registerFormControl.name.touched) {
+                        <mat-error>Name is required</mat-error>
+                      }                  
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" placeholder="Password">
+                    @if (registerFormControl.email.invalid && registerFormControl.email.touched) {
+                        <mat-error>Email is required</mat-error>
+                      }
+                </mat-form-field>
+                @if(email?.dirty){
+                    <div>
+                        @if(!email?.value?.match('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')){
+                            <mat-error>Eamil should be valid</mat-error>
+                        }
+                    </div>
+                  }
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="Password">
+                    @if (registerFormControl.password.invalid && registerFormControl.password.touched) {
+                        <mat-error>Password is required</mat-error>
+                      }  
+                </mat-form-field>
+                @if(passwordFormField?.dirty){
+                    @if(!passwordFormField?.value?.match('^(?=.*[A-Z])')){
+                        <mat-error>At least one uppercase letter.</mat-error>
+                    }
+                    @if(!passwordFormField?.value?.match('(?=.*[a-z])')){
+                        <mat-error>At least one lowercase letter.</mat-error>
+                    }
+                    @if(!passwordFormField?.value?.match('(.*[0-9].*)')){
+                        <mat-error>At least one digit.</mat-error>
+                    }
+                    @if(!passwordFormField?.value?.match('(?=.*[!@#$%^&*])')){
+                        <mat-error>At least one special character.</mat-error>
+                    }
+                    @if(!passwordFormField?.value?.match('.{8,}')){
+                        <mat-error>At least 8 character long.</mat-error>
+                    }
+                }
+                <mat-form-field>
+                    <mat-label>Confirm password</mat-label>
+                    <input matInput type="password" formControlName="confirmPassword" placeholder="Password" (input)="checkConfirmPassword()" [style.color]="color">
+                    @if (registerFormControl.confirmPassword.invalid && registerFormControl.confirmPassword.touched) {
+                        <mat-error>Confirm password is required</mat-error>
+                      }  
+                </mat-form-field>
+                <button mat-flat-button (click)="onSubmit()">Sign up</button>
+                <hr>
+                <p class="text-sm font-light mt-2 text-gray-500 dark:text-gray-400">
+                    Already have an account? <a (click)="gotoLogin()" class="primary" color="primary">Sign in</a>
+                </p>
+            </div>
+        </form>
+      </mat-card>
+</div>
