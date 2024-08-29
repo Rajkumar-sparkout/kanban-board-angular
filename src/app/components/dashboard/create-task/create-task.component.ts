@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,14 +10,19 @@ import { TaskService } from '../../../services/task.service';
 import { Task } from '../../../interface/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-create-task',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, PopupComponent, MatDatepickerModule, MatNativeDateModule, MatSelectModule],
+  imports: [
+    CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, 
+    PopupComponent, MatSelectModule, MatDialogActions, MatDialogClose, MatDialogContent, MatDatepickerModule, MatNativeDateModule,
+    MatDialogTitle, MatDialogModule
+  ],
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.css'
 })
@@ -26,20 +31,24 @@ export class CreateTaskComponent implements OnInit{
   public message: string = '';
   public messageType: 'success' | 'error' = 'success';
   public tasks: any;
-  public priorities: string[] = ["Urgent", "Medium", "Low"]
+  public priorities: string[] = ["High", "Medium", "Low"]
+  public statuses: string[] = ["Todo", "InProgress", "Done", "Testing", "Deploy"]
 
   constructor(
     private taskService: TaskService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private dialogRef: MatDialogRef<CreateTaskComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ){}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params)=> {
-      if(params['id']){
-        this.getTaskById(params['id'])
-      }
-    })
+    // this.activatedRoute.params.subscribe((params)=> {
+    //   if(params['id']){
+    //     this.getTaskById(params['id'])
+    //   }
+    // })
+    this.getTaskById(this.data)
   }
 
   taskForm = new FormGroup({
@@ -47,7 +56,7 @@ export class CreateTaskComponent implements OnInit{
     description : new FormControl("", Validators.required),
     dueDate : new FormControl("", Validators.required),
     priority : new FormControl("", Validators.required),
-    status : new FormControl("Todo"),
+    status : new FormControl("", Validators.required),
   });
 
   get taskFormControl() {
@@ -55,13 +64,14 @@ export class CreateTaskComponent implements OnInit{
   }
 
   onSubmit(){
-    if(this.tasks){
+    if(this.tasks.length > 0){
       this.taskService.updateTask(this.tasks[0].id, this.taskForm.value).subscribe({
         next: (res: any)=> {
           this.message = 'Task updated successfully';
           this.messageType = 'success';
           setTimeout(()=> {
-            this.router.navigate(['/dashboard']);
+            // this.router.navigate(['/dashboard']);
+            window.location.href = window.location.href;
           },1000)
         },
         error: (err: HttpErrorResponse)=> {
@@ -79,7 +89,8 @@ export class CreateTaskComponent implements OnInit{
             this.message = 'Task created successfully';
             this.messageType = 'success';
             setTimeout(()=> {
-              this.router.navigate(['/dashboard']);
+              // this.router.navigate(['/dashboard']);
+              window.location.href = window.location.href;
             }, 1000);
           },
           error: (err: HttpErrorResponse)=> {
@@ -93,7 +104,7 @@ export class CreateTaskComponent implements OnInit{
   }
 
   getTaskById(id: string){
-    this.taskService.getTaskById(id).subscribe({
+    this.taskService.getTaskById(id as string).subscribe({
       next: (res: any)=> {
         this.tasks = res;
         this.taskForm.patchValue({

@@ -1,6 +1,16 @@
-.example-card {
-    width: 450px;
+.container{
+    width: 400px;
 }
+/* mat-dialog-content{
+  height: 100vh
+} */
+h6{
+  font-size: 21px;
+  font-weight: 500;
+}
+/* .example-card {
+    width: 450px;
+} */
 
 .container{
     display: flex;
@@ -24,9 +34,9 @@
     flex-direction: column;
   }
 
-  .formTag{
+  /* .formTag{
     padding: 30px;
-  }
+  } */
 
   .primary{
     color: blue;

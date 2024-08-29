@@ -5,6 +5,12 @@
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </form> -->
+  <div class="example-button-container">
+    <a mat-fab extended (click)="gotoCreatTask()">
+      <mat-icon>new_label</mat-icon>
+      Add Task
+    </a>
+  </div>
   <mat-form-field class="example-form" appearance="outline">
     <mat-label>Filter by Date</mat-label>
     <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="onDateChange($event)">
@@ -14,9 +20,9 @@
   <mat-form-field appearance="outline">
     <mat-label>Select priority</mat-label>
     <mat-select [(value)]="selected" (selectionChange)="onPriorityChange($event.value)">
-      <mat-option>None</mat-option>
+      <!-- <mat-option></mat-option> -->
       <mat-option value="">All</mat-option>
-      <mat-option value="Urgent">Urgent</mat-option>
+      <mat-option value="High">High</mat-option>
       <mat-option value="Medium">Medium</mat-option>
       <mat-option value="Low">Low</mat-option>
     </mat-select>
@@ -26,11 +32,11 @@
 <div cdkDropListGroup class="board"> 
     <div *ngFor="let status of statuses" class="column" id="{{status}}" cdkDropList [cdkDropListData]="tasks[status] || tasks" (cdkDropListDropped)="onDrop($event)">
       <p class="headding">{{ status }}</p>
-      <button  *ngIf="status == 'Todo'" mat-button (click)="gotoCreatTask()">Add Task</button>
+      <!-- <button  *ngIf="status == 'Todo'" mat-button (click)="gotoCreatTask()">Add Task</button> -->
       <!-- <ng-container *ngFor="let task of tasks[status]; let i = index"> -->
         <!-- <div *ngIf="status == 'Todo'" cdkDrag [cdkDragData]="task"> -->
           <div *ngFor="let task of tasks[status]; let i = index" cdkDrag >
-            <mat-card>
+            <mat-card [ngClass]="{'red': task.priority === 'High', 'yellow': task.priority === 'Medium', 'sky': task.priority === 'Low'}">
               <mat-card-title class="title">{{ task.title }}</mat-card-title>
               <mat-card-content>
                 <p class="content">{{ task.description }}</p>
@@ -38,8 +44,9 @@
                 <p class="content">Priority: {{ task.priority }}</p>
               </mat-card-content>
               <mat-card-actions>
-                <button mat-button [routerLink]="['/createTask', task.id]">Edit</button>
-                <button mat-button (click)="deleteTask(task.id)">Delete</button>
+                <!-- <button mat-button [routerLink]="['/createTask', task.id]">Edit</button> -->
+                <button mat-button class="edit" (click)="updateTask(task.id)">Edit</button>
+                <button mat-button class="delete" (click)="deleteTask(task.id)">Delete</button>
               </mat-card-actions>
             </mat-card>
           </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Statuses, Task } from '../../interface/common';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -15,11 +15,18 @@ import { FilterPipe } from '../../pipes/filter.pipe';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerInputEvent, MatDatepickerModule, MatDateRangePicker } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { CreateTaskComponent } from './create-task/create-task.component';
+import { DeleteConfimationComponent } from './delete-confimation/delete-confimation.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, DragDropModule, MatCardModule, MatButtonModule, MatIconModule, RouterLink,  MatFormFieldModule, MatInputModule, MatSelectModule, FilterPipe, FormsModule, MatDatepickerModule, MatNativeDateModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, DragDropModule, MatCardModule, MatButtonModule, MatIconModule, RouterLink,  MatFormFieldModule, MatInputModule, 
+    MatSelectModule, FilterPipe, FormsModule, MatDatepickerModule, MatNativeDateModule, ReactiveFormsModule, MatDatepickerModule,
+    MatNativeDateModule, MatDialogModule
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -43,6 +50,7 @@ export class DashboardComponent implements OnInit{
   constructor(
     private taskService: TaskService,
     private route: Router,
+    private dialog: MatDialog,
   ){}
 
   ngOnInit(): void {
@@ -55,7 +63,6 @@ export class DashboardComponent implements OnInit{
         next: (tasks: any)=> {
           this.tasks[status] = tasks;
           this.filterTasks();
-          // this.applyFiltersAndSorting();
         },
         error: (err: HttpErrorResponse)=> {
           console.log(err); 
@@ -65,7 +72,13 @@ export class DashboardComponent implements OnInit{
   }
 
   gotoCreatTask() {
-    this.route.navigate(['createTask']);
+    // this.route.navigate(['createTask']);
+    this.dialog.open(CreateTaskComponent);
+  }
+  updateTask(id: string){
+    this.dialog.open(CreateTaskComponent, {
+      data: id,
+    });
   }
   
   // onDrop(event: CdkDragDrop<any>) {
@@ -99,14 +112,17 @@ export class DashboardComponent implements OnInit{
   }
 
   deleteTask(id: string): void {
-    this.taskService.deleteTask(id).subscribe({
-      next: (res: any)=> {
-        this.getTasks();
-      },
-      error: (err: HttpErrorResponse)=> {
-        console.log(err);
-      }
-    })
+    // this.taskService.deleteTask(id).subscribe({
+    //   next: (res: any)=> {
+    //     this.getTasks();
+    //   },
+    //   error: (err: HttpErrorResponse)=> {
+    //     console.log(err);
+    //   }
+    // })
+    this.dialog.open(DeleteConfimationComponent, {
+      data: id,
+    });
   }
 
   onDateChange(event: any): void {

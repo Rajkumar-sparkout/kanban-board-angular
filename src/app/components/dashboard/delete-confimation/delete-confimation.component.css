@@ -1,0 +1,33 @@
+button {
+    margin-right: 8px;
+  }
+
+  .title{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 21px;
+  }
+
+  .content{
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .cancel{
+    background-color: blue;
+    color: white;
+    padding: 8px;
+    border: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .delete{
+    background-color: red;
+    color: white;
+    padding: 8px;
+    border: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    cursor: pointer; 
+  }

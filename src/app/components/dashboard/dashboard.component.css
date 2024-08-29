@@ -43,9 +43,22 @@
     flex-direction: row;
     justify-content: end;
     margin: 1% 1%;
-    right: 0;
+    /* right: 0; */
   }
 
+  .example-button-container{
+    margin-right: 10px;
+  }
   .example-form{
     margin-right: 10px;
+  }
+
+  .red{
+    background-color: #ffd1d1;
+  }
+  .yellow{
+    background-color: #fff79a ;
+  }
+  .sky{
+    background-color: #bffffa;
   }
